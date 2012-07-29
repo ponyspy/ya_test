@@ -1,2 +1,2 @@
-ya_test
+Test for Yandex Shri
 =======
