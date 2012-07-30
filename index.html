@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Page Title</title>
+	<style type="text/css" media="screen">
+		.r1 {
+			background-image: url(img/4.jpg);
+			z-index:1;
+		}
+		.r2 {
+			background-color: #45bf8b;
+			z-index:2;
+		}
+		.r3 {
+			background-color: #459f6b;
+			z-index:3;
+		}
+		.r1, .r2, .r3 {
+			position:fixed;
+			top:0;
+			left:1500px;
+			width:1500px;
+			height:1500px;
+			-webkit-border-top-left-radius: 180px;
+			-moz-border-radius-topleft: 180px;
+			border-top-left-radius: 180px;
+		}
+		.title {
+			position:fixed;
+			color:white;
+			font-size: 70px;
+			margin: 250px -70px;
+			transform:rotate(-90deg);
+			-moz-transform:rotate(-90deg);
+			-webkit-transform:rotate(-90deg);
+		}
+
+	</style>
+	<script src="scripts/jquery-1.6.2.min.js"></script>
+	<script src="scripts/jquery.hoverflow.min.js"></script>
+		<script>
+	$(document).ready(function() {
+		var menu = ['.r1','.r2','.r3'];
+		
+		function generateMenu(menu) {
+			this.menu = menu;
+			this.margin = 700;
+			
+			for (var i in menu) {
+				$(menu[i]).animate({
+					left:'-=' + margin + 'px'
+				},1000);
+			margin-=100;
+			}
+		}
+		generateMenu(menu);
+
+		$('.r1').click(function() {
+			$(this).animate({left:'0'}, 500);
+			$(this).unbind();
+		});
+
+		$('.r2').click(function() {
+			$(this).animate({left:'0'}, 500);
+			$(this).unbind();
+			$('.r1').css('z-index', '3')
+							.animate({left:'900px'},500);
+		});
+
+		$('.r3').click(function() {
+			$(this).animate({left:'0'}, 500);
+			$(this).unbind();
+			$('.r2').css('z-index', '5')
+							.animate({left:'1000px'},500);
+							$('.r1').css('z-index', '4')
+											.animate({left:'900px'},500);					
+							
+		});
+
+
+$('.r1').bind({
+  mouseover: function(e) {
+    $(this).hoverFlow(e.type,{
+	left:'700px'
+},'fast');
+  },
+  mouseout: function(e) {
+        $(this).hoverFlow(e.type,{
+			left:'800px'
+		},'fast');
+  }
+});
+
+$('.r2').bind({
+  mouseover: function(e) {
+    $(this).hoverFlow(e.type,{
+	left:'800px'
+},'fast');
+  },
+  mouseout: function(e) {
+        $(this).hoverFlow(e.type,{
+			left:'900px'
+		},'fast');
+  }
+});
+
+$('.r3').bind({
+  mouseover: function(e) {
+    $(this).hoverFlow(e.type,{
+	left:'900px'
+},'fast');
+  },
+  mouseout: function(e) {
+        $(this).hoverFlow(e.type,{
+			left:'1000px'
+		},'fast');
+  }
+});
+
+
+
+		});</script>
+</head>
+<body>
+	<div class="r1"><p class='title'>task one</p></div>
+	<div class="r2"><p class='title'>task two</p></div>
+	<div class="r3"><p class='title'>task three</p></div>
+</body>
+</html>
