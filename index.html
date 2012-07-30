@@ -79,41 +79,15 @@
 		});
 
 
-$('.r1').bind({
+$(menu.join()).bind({
   mouseover: function(e) {
     $(this).hoverFlow(e.type,{
-	left:'700px'
+	left:'-=100px'
 },'fast');
   },
   mouseout: function(e) {
         $(this).hoverFlow(e.type,{
-			left:'800px'
-		},'fast');
-  }
-});
-
-$('.r2').bind({
-  mouseover: function(e) {
-    $(this).hoverFlow(e.type,{
-	left:'800px'
-},'fast');
-  },
-  mouseout: function(e) {
-        $(this).hoverFlow(e.type,{
-			left:'900px'
-		},'fast');
-  }
-});
-
-$('.r3').bind({
-  mouseover: function(e) {
-    $(this).hoverFlow(e.type,{
-	left:'900px'
-},'fast');
-  },
-  mouseout: function(e) {
-        $(this).hoverFlow(e.type,{
-			left:'1000px'
+			left:'+=100px'
 		},'fast');
   }
 });
