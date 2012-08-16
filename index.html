@@ -16,7 +16,20 @@
 			background-color: #459f6b;
 			z-index:3;
 		}
-		.r1, .r2, .r3 {
+		.r4 {
+			background-image: url(img/4.jpg);
+			z-index:4;
+		}
+		.r5 {
+			background-color: #45bf8b;
+			z-index:5;
+		}
+		.r6 {
+			background-color: #459f6b;
+			z-index:6;
+		}		
+		
+		.r1, .r2, .r3, .r4, .r5, .r6 {
 			position:fixed;
 			top:0;
 			left:1500px;
@@ -24,13 +37,15 @@
 			height:1500px;
 			-webkit-border-top-left-radius: 180px;
 			-moz-border-radius-topleft: 180px;
-			border-top-left-radius: 180px;
+			border-top-left-radius: 0px;
 		}
 		.title {
+			width: 200px;
+			height: 60px;
 			position:fixed;
 			color:white;
-			font-size: 70px;
-			margin: 250px -70px;
+			font-size: 60px;
+			margin: 300px -70px;
 			transform:rotate(-90deg);
 			-moz-transform:rotate(-90deg);
 			-webkit-transform:rotate(-90deg);
@@ -41,7 +56,7 @@
 	<script src="scripts/jquery.hoverflow.min.js"></script>
 		<script>
 	$(document).ready(function() {
-		var menu = ['.r1','.r2','.r3'];
+		var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
 		
 		function generateMenu(menu) {
 			this.menu = menu;
@@ -51,43 +66,38 @@
 				$(menu[i]).animate({
 					left:'-=' + margin + 'px'
 				},1000);
-			margin-=100;
+			margin-=80;
 			}
 		}
 		generateMenu(menu);
 
-		$('.r1').click(function() {
+		$(menu.join()).click(function() {
 			$(this).animate({left:'0'}, 500);
 			$(this).unbind();
+			
+			for (var i=0; i < menu.length; i++) {
+				if (menu[i] == '.' + this.className) {
+					$(menu[i]).css('z-index','1');
+					for (var j=0; j < i; j++) {
+						$(menu[j]).animate({
+							left:'+=80px'
+						},500).css('z-index',i+1);
+					}
+				}
+			}
 		});
-
-		$('.r2').click(function() {
-			$(this).animate({left:'0'}, 500);
-			$(this).unbind();
-			$('.r1').css('z-index', '3')
-							.animate({left:'900px'},500);
-		});
-
-		$('.r3').click(function() {
-			$(this).animate({left:'0'}, 500);
-			$(this).unbind();
-			$('.r2').css('z-index', '5')
-							.animate({left:'1000px'},500);
-							$('.r1').css('z-index', '4')
-											.animate({left:'900px'},500);					
-							
-		});
+		
 
 
 $(menu.join()).bind({
   mouseover: function(e) {
     $(this).hoverFlow(e.type,{
-	left:'-=100px'
+	left:'-=80px'
 },'fast');
   },
   mouseout: function(e) {
         $(this).hoverFlow(e.type,{
-			left:'+=100px'
+			left:'+=80px'
 		},'fast');
   }
 });
@@ -97,8 +107,11 @@ $(menu.join()).bind({
 		});</script>
 </head>
 <body>
-	<div class="r1"><p class='title'>task one</p></div>
-	<div class="r2"><p class='title'>task two</p></div>
-	<div class="r3"><p class='title'>task three</p></div>
+	<div class="r1"><p class='title'>JavaScript</p></div>
+	<div class="r2"><p class='title'>Search</p></div>
+	<div class="r3"><p class='title'>Brwosers</p></div>
+	<div class="r4"><p class='title'>Python</p></div>
+	<div class="r5"><p class='title'>Search</p></div>
+	<div class="r6"><p class='title'>Brwosers</p></div>
 </body>
 </html>
