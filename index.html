@@ -5,113 +5,125 @@
 	<title>Page Title</title>
 	<style type="text/css" media="screen">
 		.r1 {
-			background-image: url(img/4.jpg);
+			background-color: #3c00ff;
 			z-index:1;
 		}
 		.r2 {
-			background-color: #45bf8b;
+			background-color: #2d4bff;
 			z-index:2;
 		}
 		.r3 {
-			background-color: #459f6b;
+			background-color: #0474ff;
 			z-index:3;
 		}
 		.r4 {
-			background-image: url(img/4.jpg);
+			background-color: #009bff;
 			z-index:4;
 		}
 		.r5 {
-			background-color: #45bf8b;
+			background-color: #57abff;
 			z-index:5;
 		}
 		.r6 {
-			background-color: #459f6b;
+			background-color: #94c1ff;
 			z-index:6;
 		}		
 		
 		.r1, .r2, .r3, .r4, .r5, .r6 {
 			position:fixed;
 			top:0;
-			left:1500px;
+			left:100%;
 			width:1500px;
 			height:1500px;
-			-webkit-border-top-left-radius: 180px;
-			-moz-border-radius-topleft: 180px;
-			border-top-left-radius: 0px;
 		}
 		.title {
 			width: 200px;
 			height: 60px;
 			position:fixed;
 			color:white;
-			font-size: 60px;
-			margin: 300px -70px;
+			font-size: 32px;
+			margin: 250px -55px;
 			transform:rotate(-90deg);
 			-moz-transform:rotate(-90deg);
 			-webkit-transform:rotate(-90deg);
 		}
+		.block {width: 1400px; height: 1500px; left:80px; background-color: white; position:relative; z-index: 5; display:none;}
+		.block2 {width: 300px; height: 200px; left:100px; border: 1px solid #999; position:relative; float:left;}
 
 	</style>
-	<script src="scripts/jquery-1.6.2.min.js"></script>
+	<script src="scripts/jquery-1.8.0.min.js"></script>
 	<script src="scripts/jquery.hoverflow.min.js"></script>
 		<script>
 	$(document).ready(function() {
 		var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
 		
 		function generateMenu(menu) {
-			this.menu = menu;
-			this.margin = 700;
+			var menu = menu;
+			var margin = 30;
+			$(menu.join()).off();
 			
 			for (var i in menu) {
 				$(menu[i]).animate({
-					left:'-=' + margin + 'px'
-				},1000);
-			margin-=80;
+					left:'-=' + margin + '%'
+				},700);
+			margin-=5;
 			}
+			
+			$(menu.join()).on({
+				mouseover: function(e) {
+					$(this).hoverFlow(e.type,{
+						left:'-=5%'
+					},'fast');
+			  },
+			  mouseout: function(e) {
+					$(this).hoverFlow(e.type,{
+						left:'+=5%'
+					},'fast');
+			  },
+				click: function() {
+					$(menu.join()).animate({
+						'left':'100%'
+					},500);
+
+					$(this).animate({
+						'left':'0%'
+					},500);
+					
+					$(this).off();
+					$('.block').fadeIn(500);
+
+					$(this).click(function() {
+						$(this).animate({
+							'left':'100%'
+						},500, function() {
+							$('.block').hide();
+							generateMenu(menu);
+						});
+					});
+				}
+			});	
 		}
 		generateMenu(menu);
 
-		$(menu.join()).click(function() {
-			$(this).animate({left:'0'}, 500);
-			$(this).unbind();
-			
-			for (var i=0; i < menu.length; i++) {
-				if (menu[i] == '.' + this.className) {
-					$(menu[i]).css('z-index','1');
-					for (var j=0; j < i; j++) {
-						$(menu[j]).animate({
-							left:'+=80px'
-						},500).css('z-index',i+1);
-					}
-				}
-			}
-		});
-		
-
-
-$(menu.join()).bind({
-  mouseover: function(e) {
-    $(this).hoverFlow(e.type,{
-	left:'-=80px'
-},'fast');
-  },
-  mouseout: function(e) {
-        $(this).hoverFlow(e.type,{
-			left:'+=80px'
-		},'fast');
-  }
-});
 
 
 
 		});</script>
 </head>
 <body>
-	<div class="r1"><p class='title'>JavaScript</p></div>
-	<div class="r2"><p class='title'>Search</p></div>
-	<div class="r3"><p class='title'>Brwosers</p></div>
-	<div class="r4"><p class='title'>Python</p></div>
-	<div class="r5"><p class='title'>Search</p></div>
-	<div class="r6"><p class='title'>Brwosers</p></div>
+	Page Title
+	<div class="r1">
+		<p class='title'>DEBUG</p>
+		<div class="block">
+			<div class="block2">
+				Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах.
+			</div>
+		</div>
+	</div>
+	<div class="r2"><p class='title'>BROWSERS</p></div>
+	<div class="r3"><p class='title'>JAVASCRIPT</p></div>
+	<div class="r4"><p class='title'>SEARCH</p></div>
+	<div class="r5"><p class='title'>PYTHON</p></div>
+	<div class="r6"><p class='title'>ABOUT</p></div>
 </body>
 </html>
