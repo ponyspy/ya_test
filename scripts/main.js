@@ -3,19 +3,19 @@ $(document).ready(function() {
 	function generateMenu() {
 		var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
 		var margin = 30;
-		
+		var name;
 		$(menu.join()).off();
 		
 		$('.main_title').animate({
 			'left':'15%'
-		},700, function() {
-			for (var i in menu) {
-				$(menu[i]).animate({
-					left:'-=' + margin + '%'
-				},700);
-			margin-=5;
-			}
-		});
+		},700);
+		
+		for (var i in menu) {
+			$(menu[i]).animate({
+				left:'-=' + margin + '%'
+			},700);
+		margin-=5;
+		}
 		
 		$(menu.join()).on({
 			mouseover: function(e) {
@@ -37,6 +37,9 @@ $(document).ready(function() {
 					'left':'-=60%'
 				},500);
 				
+				name = $('.'+this.className+'> .title').text();
+				$('.'+this.className+'> .title').text('BACK');
+				
 				$(this).animate({
 					'left':'0%'
 				},500);
@@ -47,13 +50,11 @@ $(document).ready(function() {
 				});
 
 				$(this).click(function() {
-				/*	$('.main_title').animate({
-						'left':'15%'
-					},500); */
 					$(this).animate({
 						'left':'100%'
 					},500, function() {
 						$('.block').hide();
+						$('.'+this.className+'> .title').text(name);
 						generateMenu();
 					});
 				});
