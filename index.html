@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>Page Title</title>
+	<title>Сайт-резюме</title>
+	<link rel="stylesheet" type="text/css" href="style/jquery.jscrollpane.css" />
 	<style type="text/css" media="screen">
 		.r1 {
 			background-color: #3c00ff;
@@ -47,19 +48,31 @@
 			-moz-transform:rotate(-90deg);
 			-webkit-transform:rotate(-90deg);
 		}
-		.block {width: 1400px; height: 1500px; left:80px; background-color: white; position:relative; z-index: 5; display:none;}
-		.block2 {width: 300px; height: 200px; left:100px; border: 1px solid #999; position:relative; float:left;}
-
+		.block {width: 1500px; height: 1500px; left:80px; background-color: white; position:relative; z-index: 5; display:none;}
+		.block2 {width: 75%; left:50px; border-bottom: 2px solid black; position:relative;}
+		.scroll-pane
+		{
+			width: 75%;
+			height: 500px;
+			overflow: auto;
+			top:20px;
+			left:50px;
+			position:relative;
+		}
 	</style>
-	<script src="scripts/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="scripts/jquery.hoverflow.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
+
 		<script>
-	$(document).ready(function() {
-		var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
 		
-		function generateMenu(menu) {
-			var menu = menu;
+	$(document).ready(function() {
+		
+		function generateMenu() {
+			var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
 			var margin = 30;
+			
 			$(menu.join()).off();
 			
 			for (var i in menu) {
@@ -73,37 +86,39 @@
 				mouseover: function(e) {
 					$(this).hoverFlow(e.type,{
 						left:'-=5%'
-					},'fast');
+					},200);
 			  },
 			  mouseout: function(e) {
 					$(this).hoverFlow(e.type,{
 						left:'+=5%'
-					},'fast');
+					},200);
 			  },
 				click: function() {
 					$(menu.join()).animate({
 						'left':'100%'
-					},500);
+					},{ duration: 500, queue: false });
 
 					$(this).animate({
 						'left':'0%'
 					},500);
 					
 					$(this).off();
-					$('.block').fadeIn(500);
+					$('.block').fadeIn(500, function() {
+						$('.scroll-pane').jScrollPane();
+					});
 
 					$(this).click(function() {
 						$(this).animate({
 							'left':'100%'
 						},500, function() {
 							$('.block').hide();
-							generateMenu(menu);
+							generateMenu();
 						});
 					});
 				}
 			});	
 		}
-		generateMenu(menu);
+		generateMenu();
 
 
 
@@ -116,14 +131,216 @@
 		<p class='title'>DEBUG</p>
 		<div class="block">
 			<div class="block2">
-				Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах.
+				<b>Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах. </b>
+			</div>
+			<div class="scroll-pane">
+				<pre>
+Консоль отладки Google Chrome, Safari
+Плагин FireBug для Mozilla
+
+В качестве приемов можно делать вывод console.log(), alert() (Old school :), использование try..catch
+				</pre>
 			</div>
 		</div>
 	</div>
-	<div class="r2"><p class='title'>BROWSERS</p></div>
-	<div class="r3"><p class='title'>JAVASCRIPT</p></div>
-	<div class="r4"><p class='title'>SEARCH</p></div>
+	<div class="r2">
+		<p class='title'>BROWSERS</p>
+		<div class="block">
+			<div class="block2">
+				<b>Опишите своими словами, что происходит в браузерах при клике на ссылку yandex.ru (полнота ответа – на ваше усмотрение). </b>
+			</div>
+		</div>
+	</div>
+	<div class="r3">
+		<p class='title'>JAVASCRIPT</p>
+				<div class="block">
+					<div class="block2">
+						<b>Предположим, что мы представляем автосалон по продаже японских и немецких автомобилей. У нас есть базовые классы и примеры их использования. Допишите недостающий код.</b>
+					</div>
+					<div class="scroll-pane">
+						<pre><code>
+function Car(manufacturer, model, year) {
+    var today = new Date();
+    today = today.getFullYear();
+
+    this.manufacturer = manufacturer;
+    this.model = model;
+    this.year = year || today;
+    this.price = '0';
+    this.id = this.manufacturer + ' ' + this.model + ' ' + this.year;
+
+    this.getInfo = function() {
+      return this.id;
+    }
+    this.getDetailedInfo = function() {
+      return 'Производитель: ' + this.manufacturer + '. ' + 'Модель: ' + this.model + '. ' + 'Год: ' + this.year + '.';
+    }
+}
+Car.prototype.toString = function() {
+  return this.id;
+}
+
+
+var bmw = new Car("BMW", "X5", 2010),
+    audi = new Car("Audi", "Q5", 2012),
+    toyota = new Car("Toyota", "Camry");
+
+console.log('Car: ' + bmw);
+console.log(bmw.getInfo());
+console.log(bmw.getDetailedInfo());
+
+function CarDealer(name) {
+    this.name = name;
+    this.cars = [];
+
+    this.add = function() {
+      var Args = [].slice.call(arguments);
+      this.cars = this.cars.concat(Args);
+
+      return this;
+    }
+    this.setPrice = function(car, price) {
+      var car = car;
+      var price = price;
+
+      for (var i = 0; i < this.cars.length; i++) {
+        if (this.cars[i].id == car) {
+          this.cars[i].price = price;
+        }
+      }
+
+      return this;
+    }
+    this.list = function() {
+      var list = [];
+
+      for (var i = 0; i < this.cars.length; i++) {
+        list.push(this.cars[i].id);
+      }
+      console.log(list.join(', '));
+
+      return this;
+    }
+    this.listByCountry = function(country) {
+      var country = country;
+      var list = [];
+
+      Car.prototype.getCountry = function() {
+        switch (this.manufacturer.toLowerCase()) {
+          case 'bmw':
+          case 'audi':
+            return 'Germany';
+
+          case 'toyota':
+            return 'Japan';
+        }
+      }
+
+      for (var i = 0; i < this.cars.length; i++) {
+        if (this.cars[i].getCountry() == country) {
+          list.push(this.cars[i].id);
+        }
+      }
+      console.log(list.join(', '));
+
+      return this;
+    }
+    this.listRUB = function() {
+      var currency;
+      var priceList = [];
+
+      for (var i = 0; i < this.cars.length; i++) {
+        curency = this.cars[i].price.charAt(0);
+        switch (curency) {
+          case '€':
+            priceList.push(this.cars[i].id + ': ' + this.cars[i].price.substring(1) * 39 + 'p.'); continue;
+
+          case '¥':
+            priceList.push(this.cars[i].id + ': ' + this.cars[i].price.substring(1) * 0.4 + 'p.'); continue;
+        }
+      }
+      console.log(priceList.join(', '));
+
+      return this;
+    }
+}
+
+var yandex = new CarDealer('Яндекс.Авто');
+
+yandex
+    .add(toyota)
+    .add(bmw, audi);
+
+yandex
+    .setPrice('BMW X5 2010', '€2000')
+    .setPrice('Audi Q5 2012', '€3000')
+    .setPrice('Toyota Camry 2012', '¥3000');
+
+yandex.list();
+yandex.listByCountry('Germany');
+yandex.listRUB();
+						</pre></code>
+					</div>
+				</div>
+	</div>
+	<div class="r4">
+		<p class='title'>SEARCH</p>
+		<div class="block">
+			<div class="block2">
+				<b>Найдите все текстовые файлы (*.txt), в имени которых содержится «yandex», а в содержимом — «школа фронтенд-разработки».<br>
+					(предполагается работа с командной строкой)</b>
+			</div>
+			<div class="scroll-pane">
+				<pre>grep -r -l "школа фронтенд-разработки" --include "*yandex*.txt" *</pre>
+			</div>
+		</div>
+	</div>
 	<div class="r5"><p class='title'>PYTHON</p></div>
-	<div class="r6"><p class='title'>ABOUT</p></div>
+	<div class="r6">
+		<p class='title'>ABOUT</p>
+		<div class="block">
+			<div class="block2">
+				<b>
+					Расскажите, в каком объёме и при каких обстоятельствах вы изучали следующие темы:<br><br>
+					языки программирования (императивные/декларативные, разные системы типов)<br>
+					структуры (классы, структуры данных, примитивные типы)<br>
+					парадигмы (события, ООП, параллельность/асинхронность, кеширование)<br>
+					алгоритмы (парсинг, сортировка, поиск)<br>
+					паттерны
+				</b>
+			</div>
+				<div class="scroll-pane">
+					<pre>
+<b>Языки программирования (императивные/декларативные, разные системы типов)</b>
+
+Знакомство с языками программирования завязалось довольно давно, первый опыт был в школе, изучали Basic и очень приметивный C++. 
+Уже тогда я понял что императивный стиль и жесткая типизация это не по мне. Всякие указатели, работа с памятью итд... 
+Хотя это уже было в институте. Потом я узнал про Ruby и это меня уже действительно заинтересовало, уровень абстракции, 
+который давал этот язык позволял сконцентрироваться на поставленной задаче не особо задумываясь о способах ее решения. 
+И в какой-то момент я стал замечать нерасторопность этого языка, особенно это касалось серверных фрэймворков. 
+Может быть я не достаточно погрузился в философию Ruby, но я решил переключиться на frontend и вот тогда я познакомился с JavaScript.
+
+<b>Структуры (классы, структуры данных, примитивные типы)</b>
+
+Классы и типы данных довольно подробно обясняли в институте на примере С++, решали всякие задачки, в основном математического характера.
+
+<b>Парадигмы (события, ООП, параллельность/асинхронность, кеширование)</b>
+
+Событийная модель и паралельность вошла в мою жизь вместе с JavaScript. 
+Я люблю принцип безшовных интерфейсов и там без асинхронности и кэширования не обойтись. 
+ООП в JavaScript долгое время был непонятен ввиду C++ прошлого, но со временем действительность заставила им овладеть. 
+Еще мне очень греет душу серверный JavaScript, и уж там-то событийная модель возведена в абсолют.
+
+<b>Алгоритмы (парсинг, сортировка, поиск)</b>
+
+Парсинга и поиска очень много повидал на работе, много разрозненных данных которые требовалось как-то упорядочивать. 
+Выдерать куски и снова упорядычевать... Все это сначала писалось на Ruby и совсем недавно решил попробовать Python, 
+но как-то не пошло...
+
+<b>Паттерны</b>
+				</pre>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
