@@ -4,134 +4,24 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>Сайт-резюме</title>
 	<link rel="stylesheet" type="text/css" href="style/jquery.jscrollpane.css" />
-	<style type="text/css" media="screen">
-		.r1 {
-			background-color: #3c00ff;
-			z-index:1;
-		}
-		.r2 {
-			background-color: #2d4bff;
-			z-index:2;
-		}
-		.r3 {
-			background-color: #0474ff;
-			z-index:3;
-		}
-		.r4 {
-			background-color: #009bff;
-			z-index:4;
-		}
-		.r5 {
-			background-color: #57abff;
-			z-index:5;
-		}
-		.r6 {
-			background-color: #94c1ff;
-			z-index:6;
-		}		
-		
-		.r1, .r2, .r3, .r4, .r5, .r6 {
-			position:fixed;
-			top:0;
-			left:100%;
-			width:1500px;
-			height:1500px;
-		}
-		.title {
-			width: 200px;
-			height: 60px;
-			position:fixed;
-			color:white;
-			font-size: 32px;
-			margin: 250px -55px;
-			transform:rotate(-90deg);
-			-moz-transform:rotate(-90deg);
-			-webkit-transform:rotate(-90deg);
-		}
-		.block {width: 1500px; height: 1500px; left:80px; background-color: white; position:relative; z-index: 5; display:none;}
-		.block2 {width: 75%; left:50px; border-bottom: 2px solid black; position:relative;}
-		.scroll-pane
-		{
-			width: 75%;
-			height: 500px;
-			overflow: auto;
-			top:20px;
-			left:50px;
-			position:relative;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="style/main.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="scripts/jquery.hoverflow.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.jscrollpane.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
-
-		<script>
-		
-	$(document).ready(function() {
-		
-		function generateMenu() {
-			var menu = ['.r1','.r2','.r3','.r4','.r5', '.r6'];
-			var margin = 30;
-			
-			$(menu.join()).off();
-			
-			for (var i in menu) {
-				$(menu[i]).animate({
-					left:'-=' + margin + '%'
-				},700);
-			margin-=5;
-			}
-			
-			$(menu.join()).on({
-				mouseover: function(e) {
-					$(this).hoverFlow(e.type,{
-						left:'-=5%'
-					},200);
-			  },
-			  mouseout: function(e) {
-					$(this).hoverFlow(e.type,{
-						left:'+=5%'
-					},200);
-			  },
-				click: function() {
-					$(menu.join()).animate({
-						'left':'100%'
-					},{ duration: 500, queue: false });
-
-					$(this).animate({
-						'left':'0%'
-					},500);
-					
-					$(this).off();
-					$('.block').fadeIn(500, function() {
-						$('.scroll-pane').jScrollPane();
-					});
-
-					$(this).click(function() {
-						$(this).animate({
-							'left':'100%'
-						},500, function() {
-							$('.block').hide();
-							generateMenu();
-						});
-					});
-				}
-			});	
-		}
-		generateMenu();
-
-
-
-
-		});</script>
+	<script type="text/javascript" src="scripts/main.js"></script>
 </head>
 <body>
-	Page Title
+	<div class="main_title">
+		Технические задания
+		<br>
+		Для школы разработки интерфейсов Yandex
+	</div>
 	<div class="r1">
 		<p class='title'>DEBUG</p>
 		<div class="block">
 			<div class="block2">
-				<b>Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах. </b>
+				Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах.
 			</div>
 			<div class="scroll-pane">
 				<pre>
@@ -147,7 +37,9 @@
 		<p class='title'>BROWSERS</p>
 		<div class="block">
 			<div class="block2">
-				<b>Опишите своими словами, что происходит в браузерах при клике на ссылку yandex.ru (полнота ответа – на ваше усмотрение). </b>
+				Опишите своими словами, что происходит в браузерах при клике на ссылку yandex.ru
+				<br>
+				(полнота ответа – на ваше усмотрение).
 			</div>
 		</div>
 	</div>
@@ -155,7 +47,9 @@
 		<p class='title'>JAVASCRIPT</p>
 				<div class="block">
 					<div class="block2">
-						<b>Предположим, что мы представляем автосалон по продаже японских и немецких автомобилей. У нас есть базовые классы и примеры их использования. Допишите недостающий код.</b>
+						Предположим, что мы представляем автосалон по продаже японских и немецких автомобилей.
+						<br>
+						У нас есть базовые классы и примеры их использования. Допишите недостающий код.
 					</div>
 					<div class="scroll-pane">
 						<pre><code>
@@ -287,8 +181,9 @@ yandex.listRUB();
 		<p class='title'>SEARCH</p>
 		<div class="block">
 			<div class="block2">
-				<b>Найдите все текстовые файлы (*.txt), в имени которых содержится «yandex», а в содержимом — «школа фронтенд-разработки».<br>
-					(предполагается работа с командной строкой)</b>
+				Найдите все текстовые файлы (*.txt), в имени которых содержится «yandex», 
+				<br>
+				а в содержимом — «школа фронтенд-разработки». (предполагается работа с командной строкой)
 			</div>
 			<div class="scroll-pane">
 				<pre>grep -r -l "школа фронтенд-разработки" --include "*yandex*.txt" *</pre>
@@ -300,14 +195,7 @@ yandex.listRUB();
 		<p class='title'>ABOUT</p>
 		<div class="block">
 			<div class="block2">
-				<b>
-					Расскажите, в каком объёме и при каких обстоятельствах вы изучали следующие темы:<br><br>
-					языки программирования (императивные/декларативные, разные системы типов)<br>
-					структуры (классы, структуры данных, примитивные типы)<br>
-					парадигмы (события, ООП, параллельность/асинхронность, кеширование)<br>
-					алгоритмы (парсинг, сортировка, поиск)<br>
-					паттерны
-				</b>
+					Расскажите, в каком объёме и при каких обстоятельствах вы изучали следующие темы:
 			</div>
 				<div class="scroll-pane">
 					<pre>
