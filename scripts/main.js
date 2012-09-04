@@ -46,11 +46,12 @@ $(document).ready(function() {
 				},500);
 				
 				$(this).off();
+				
 				$('.block').fadeIn(500, function() {
 					$('.scroll-pane').jScrollPane();
 					$('.button').click(function() {
-						var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=900px,height=600px"
-						window.open("js_print.html", "Print", params)
+						var params = 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=900px,height=600px'
+						window.open('js_print.html', 'Print', params)
 					});
 				});
 
@@ -65,10 +66,10 @@ $(document).ready(function() {
 						});
 					}
 				});
-			
+
 			}
 		});	
 	}
 	generateMenu();
 
-	});
+});

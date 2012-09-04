@@ -1,10 +1,9 @@
 @font-face {
-	font-family:Charter;
+	font-family: Charter;
 	src: url('/font/CharterITC.otf');
 }
-
 .main_title {
-	font-family:Charter;
+	font-family: Charter;
 	width: 500px;
 	height: 60px;
 	font-size: 20px;
@@ -12,31 +11,30 @@
 	text-align: center;
 	top: 250px;
 	left: -60%;
-	/* border-bottom: 1px solid black; */
 }
 .r1 {
 	background-color: #3c00ff;
-	z-index:1;
+	z-index: 1;
 }
 .r2 {
 	background-color: #2d4bff;
-	z-index:2;
+	z-index: 2;
 }
 .r3 {
 	background-color: #0474ff;
-	z-index:3;
+	z-index: 3;
 }
 .r4 {
 	background-color: #009bff;
-	z-index:4;
+	z-index: 4;
 }
 .r5 {
 	background-color: #57abff;
-	z-index:5;
+	z-index: 5;
 }
 .r6 {
 	background-color: #94c1ff;
-	z-index:6;
+	z-index: 6;
 }
 .r1, .r2, .r3, .r4, .r5, .r6 {
 	position:fixed;
@@ -48,8 +46,8 @@
 .title {
 	width: 200px;
 	height: 60px;
-	position:fixed;
-	color:white;
+	position: fixed;
+	color: white;
 	font-size: 32px;
 	margin: 250px -55px;
 	transform:rotate(-90deg);
@@ -61,41 +59,41 @@
 	height: 1500px;
 	left: 80px; 
 	background-color: white; 
-	position:relative; 
+	position: relative; 
 	z-index: 7;
-	display:none;
+	display: none;
 }
 .block2 {
-	font-family:Charter;
+	font-family: Charter;
 	width: 75%;
 	left: 50px;
-	position:relative;
+	position: relative;
 	font-size: 20px;
 }
 .line {
-	top:15px;
+	top: 15px;
 	width: 75%;
 	height: 10px;
-	left:50px;
-	position:relative;
+	left: 50px;
+	position: relative;
 	border-bottom: 1px solid black;
 }
 .scroll-pane {
 	width: 75%;
-	height: 500px;
+	height: 32%;
 	overflow: auto;
 	top: 20px;
 	left: 50px;
-	position:relative;
+	position: relative;
 }
 .button {
-	font-family:Charter;
+	font-family: Charter;
 	top: 20px;
 	left: 50px;
 	width: 70px;
 	height:20px;
-	cursor:pointer;
+	cursor: pointer;
 	border: 2px solid black;
-	position:relative;
+	position: relative;
 	text-align: center;
 }

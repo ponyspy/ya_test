@@ -1,0 +1,138 @@
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>JavaScript Print</title>
+</head>
+<body>
+	<pre>
+		<code>
+// @TODO: если конструктор вызывается без указания текущего года, то подставлять текущий
+function Car(manufacturer, model, year) {
+    var today = new Date();
+    today = today.getFullYear();
+
+    this.manufacturer = manufacturer;
+    this.model = model;
+    this.year = year || today;
+    this.price = '0';
+    this.id = this.manufacturer + ' ' + this.model + ' ' + this.year;
+
+    this.getInfo = function() {
+      return this.id;
+    }
+    this.getDetailedInfo = function() {
+      return 'Производитель: ' + this.manufacturer + '. ' + 'Модель: ' + this.model + '. ' + 'Год: ' + this.year + '.';
+    }
+}
+
+Car.prototype.toString = function() {
+  return this.id;
+}
+
+
+var bmw = new Car("BMW", "X5", 2010),
+    audi = new Car("Audi", "Q5", 2012),
+    toyota = new Car("Toyota", "Camry");
+
+console.log('Car: ' + bmw); //-> Car: BMW X5 2010
+console.log(bmw.getInfo()); //-> BMW X5 2010
+console.log(bmw.getDetailedInfo()); //-> Производитель: BMW. Модель: X5. Год: 2010
+
+function CarDealer(name) {
+    this.name = name;
+    this.cars = [];
+
+		// @TODO: реализовать метод добавления машин в автосалон. Предусмотреть возможность добавления одной машины, нескольких машин.
+    this.add = function() {
+      var Args = [].slice.call(arguments);
+      this.cars = this.cars.concat(Args);
+
+      return this;
+    }
+		// @TODO: реализовать метод установки цены на машину
+    this.setPrice = function(car, price) {
+      var car = car;
+      var price = price;
+
+      for (var i = 0; i < this.cars.length; i++) {
+        if (this.cars[i].id == car) {
+          this.cars[i].price = price;
+        }
+      }
+
+      return this;
+    }
+    this.list = function() {
+      var list = [];
+
+      for (var i = 0; i < this.cars.length; i++) {
+        list.push(this.cars[i].id);
+      }
+      console.log(list.join(', '));
+
+      return this;
+    }
+		// @TODO: реализовать вывод списка автомобилей в продаже, с фильтрацией по стране производителю, используя метод getCountry.
+    this.listByCountry = function(country) {
+      var country = country;
+      var list = [];
+
+      Car.prototype.getCountry = function() {
+        switch (this.manufacturer.toLowerCase()) {
+          case 'bmw':
+          case 'audi':
+            return 'Germany';
+
+          case 'toyota':
+            return 'Japan';
+        }
+      }
+
+      for (var i = 0; i < this.cars.length; i++) {
+        if (this.cars[i].getCountry() == country) {
+          list.push(this.cars[i].id);
+        }
+      }
+      console.log(list.join(', '));
+
+      return this;
+    }
+		// @TODO: бонус! выводить список машин с ценой в рублях.
+    this.listRUB = function() {
+      var currency;
+      var priceList = [];
+
+      for (var i = 0; i < this.cars.length; i++) {
+        curency = this.cars[i].price.charAt(0);
+        switch (curency) {
+          case '€':
+            priceList.push(this.cars[i].id + ': ' + this.cars[i].price.substring(1) * 39 + 'p.'); continue;
+
+          case '¥':
+            priceList.push(this.cars[i].id + ': ' + this.cars[i].price.substring(1) * 0.4 + 'p.'); continue;
+        }
+      }
+      console.log(priceList.join(', '));
+
+      return this;
+    }
+}
+
+var yandex = new CarDealer('Яндекс.Авто');
+
+yandex
+    .add(toyota)
+    .add(bmw, audi);
+
+yandex
+    .setPrice('BMW X5 2010', '€2000')
+    .setPrice('Audi Q5 2012', '€3000')
+    .setPrice('Toyota Camry 2012', '¥3000');
+
+yandex.list(); //-> BMW X5 2010, Audi Q5 2012, Toyota Camry 2012
+yandex.listByCountry('Germany'); //-> BMW X5 2010, Audi Q5 2012
+yandex.listRUB(); //-> Toyota Camry 2012: 1200p., BMW X5 2010: 78000p., Audi Q5 2012: 117000p.
+		</code>
+	</pre>
+</body>
+</html>
