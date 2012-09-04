@@ -23,6 +23,7 @@
 			<div class="block2">
 				Перечислите известные вам инструменты и приёмы для отладки кода в разных браузерах.
 			</div>
+			<div class='line'></div>
 			<div class="scroll-pane">
 				<pre>
 Консоль отладки Google Chrome, Safari
@@ -41,6 +42,12 @@
 				<br>
 				(полнота ответа – на ваше усмотрение).
 			</div>
+			<div class='line'></div>
+			<div class="scroll-pane">
+				<pre>
+Открывается страничка Яндекса :)
+				</pre>
+			</div>
 		</div>
 	</div>
 	<div class="r3">
@@ -51,8 +58,10 @@
 						<br>
 						У нас есть базовые классы и примеры их использования. Допишите недостающий код.
 					</div>
+					<div class='line'></div>
 					<div class="scroll-pane">
-						<pre><code>
+						<pre>
+							<code>
 function Car(manufacturer, model, year) {
     var today = new Date();
     today = today.getFullYear();
@@ -173,8 +182,11 @@ yandex
 yandex.list();
 yandex.listByCountry('Germany');
 yandex.listRUB();
-						</pre></code>
+							</code>
+						</pre>
 					</div>
+					<div class="line"></div>
+					<div class="button">PRINT</div>
 				</div>
 	</div>
 	<div class="r4">
@@ -185,18 +197,56 @@ yandex.listRUB();
 				<br>
 				а в содержимом — «школа фронтенд-разработки». (предполагается работа с командной строкой)
 			</div>
+			<div class='line'></div>
 			<div class="scroll-pane">
 				<pre>grep -r -l "школа фронтенд-разработки" --include "*yandex*.txt" *</pre>
 			</div>
 		</div>
 	</div>
-	<div class="r5"><p class='title'>PYTHON</p></div>
+	<div class="r5">
+		<p class='title'>PYTHON</p>
+		<div class="block">
+			<div class="block2">
+				Дана программа, реализованная одновременно на Bash, Python и Perl. Программа принимает произвольное количество аргументов и печатает их количество. Нужно добавить опцию -v для verbose-режима, в котором дополнительно выводится значение каждого из аргументов.
+			</div>
+			<div class='line'></div>
+			<div class="scroll-pane">
+				<pre>
+					<code>
+#!/usr/bin/env python
+
+import argparse
+
+parser = argparse.ArgumentParser(description='Print the number of arguments.')
+parser.add_argument('arguments', metavar='ARG', type=str, nargs='*', help='some arguments')
+parser.add_argument('-m', dest='message', default='', help='custom message')
+# TODO: add '-v' option for verbose mode
+
+args = parser.parse_args()
+
+count = 0
+
+for a in args.arguments:
+    # TODO: add '-v' option for verbose mode
+    # and print each argument
+    count += 1
+
+if args.message != '':
+    print(args.message)
+
+print(count)
+					</code>
+				</pre>
+			</div>
+		</div>
+	</div>
 	<div class="r6">
 		<p class='title'>ABOUT</p>
 		<div class="block">
 			<div class="block2">
 					Расскажите, в каком объёме и при каких обстоятельствах вы изучали следующие темы:
 			</div>
+				<div class='line'></div>
 				<div class="scroll-pane">
 					<pre>
 <b>Языки программирования (императивные/декларативные, разные системы типов)</b>
@@ -226,6 +276,8 @@ yandex.listRUB();
 но как-то не пошло...
 
 <b>Паттерны</b>
+
+Пока сложновато дается, но я не сдаюсь :)
 				</pre>
 			</div>
 		</div>

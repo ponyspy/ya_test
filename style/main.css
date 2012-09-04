@@ -10,8 +10,8 @@
 	font-size: 20px;
 	position: relative;
 	text-align: center;
-	top:250px;
-	left:-60%;
+	top: 250px;
+	left: -60%;
 	/* border-bottom: 1px solid black; */
 }
 .r1 {
@@ -40,10 +40,10 @@
 }
 .r1, .r2, .r3, .r4, .r5, .r6 {
 	position:fixed;
-	top:0;
-	left:100%;
-	width:1500px;
-	height:1500px;
+	top: 0;
+	left: 100%;
+	width: 1500px;
+	height: 1500px;
 }
 .title {
 	width: 200px;
@@ -59,25 +59,43 @@
 .block {
 	width: 1500px; 
 	height: 1500px;
-	left:80px; 
+	left: 80px; 
 	background-color: white; 
 	position:relative; 
-	z-index: 6;
+	z-index: 7;
 	display:none;
 }
 .block2 {
 	font-family:Charter;
 	width: 75%;
-	left:50px; 
-	border-bottom: 1px solid black; 
+	left: 50px;
 	position:relative;
-	font-size:20px;
+	font-size: 20px;
+}
+.line {
+	top:15px;
+	width: 75%;
+	height: 10px;
+	left:50px;
+	position:relative;
+	border-bottom: 1px solid black;
 }
 .scroll-pane {
 	width: 75%;
 	height: 500px;
 	overflow: auto;
-	top:20px;
-	left:50px;
+	top: 20px;
+	left: 50px;
 	position:relative;
+}
+.button {
+	font-family:Charter;
+	top: 20px;
+	left: 50px;
+	width: 70px;
+	height:20px;
+	cursor:pointer;
+	border: 2px solid black;
+	position:relative;
+	text-align: center;
 }
